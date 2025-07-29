@@ -17,4 +17,4 @@ if __name__ == "__main__":
         "testcase",
         f"--html={report_file}",
         "--self-contained-html"
-    ])git add
+    ])
