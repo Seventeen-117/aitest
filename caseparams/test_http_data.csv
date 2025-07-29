@@ -1,0 +1,4 @@
+case_id,description,url,method,params,expected_result
+1,测试GET请求,https://httpbin.org/get,GET,"{\"key\": \"value1\"}","{\"args\": {\"key\": \"value1\"}}"
+2,测试POST请求,https://httpbin.org/post,POST,"{\"key\": \"value2\"}","{\"json\": {\"key\": \"value2\"}}"
+3,测试带参数GET,https://httpbin.org/get,GET,"{\"foo\": \"bar\"}","{\"args\": {\"foo\": \"bar\"}}" 
