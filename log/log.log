@@ -1,27 +1,61 @@
-[2025-07-29 23:05:52,167] [INFO] 执行用例: 1 - 正常请求-简单问题
-[2025-07-29 23:05:52,168] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:05:52,169] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
-[2025-07-29 23:05:56,922] [INFO] 执行用例: 2 - 异常请求-缺少message参数
-[2025-07-29 23:05:56,922] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:05:56,922] [INFO] 请求参数: {'user_id': 'user002'}
-[2025-07-29 23:06:01,433] [INFO] 执行用例: 3 - 正常请求-英文问题
-[2025-07-29 23:06:01,433] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:06:01,434] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
-[2025-07-29 23:09:01,627] [INFO] 执行用例: 1 - 正常请求-简单问题
-[2025-07-29 23:09:01,628] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:09:01,628] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
-[2025-07-29 23:09:06,379] [INFO] 执行用例: 2 - 异常请求-缺少message参数
-[2025-07-29 23:09:06,379] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:09:06,379] [INFO] 请求参数: {'user_id': 'user002'}
-[2025-07-29 23:09:10,896] [INFO] 执行用例: 3 - 正常请求-英文问题
-[2025-07-29 23:09:10,897] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:09:10,897] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
-[2025-07-29 23:23:53,286] [INFO] 执行用例: 1 - 正常请求-简单问题
-[2025-07-29 23:23:53,287] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:23:53,288] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
-[2025-07-29 23:23:58,060] [INFO] 执行用例: 2 - 异常请求-缺少message参数
-[2025-07-29 23:23:58,061] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:23:58,061] [INFO] 请求参数: {'user_id': 'user002'}
-[2025-07-29 23:24:02,558] [INFO] 执行用例: 3 - 正常请求-英文问题
-[2025-07-29 23:24:02,558] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
-[2025-07-29 23:24:02,558] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 00:33:43,799] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 00:33:43,801] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:33:43,801] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 00:33:48,585] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 00:33:48,585] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:33:48,585] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 00:33:53,101] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 00:33:53,102] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:33:53,102] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 00:36:34,436] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 00:36:34,437] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:36:34,438] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 00:36:39,147] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 00:36:39,148] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:36:39,148] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 00:36:43,676] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 00:36:43,676] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:36:43,677] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 00:36:48,184] [ERROR] JSON解析失败: {\key\": \"value1\"}", 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:48,185] [ERROR] 清理后仍无法解析JSON: {key": "value1"}"
+[2025-07-30 00:36:48,185] [ERROR] JSON解析失败: {\args\": {\"key\": \"value1\"}}", 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:48,186] [ERROR] 清理后仍无法解析JSON: {args": {"key": "value1"}}"
+[2025-07-30 00:36:48,187] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 00:36:48,187] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 00:36:48,190] [INFO] 请求参数: {}
+[2025-07-30 00:36:50,312] [ERROR] JSON解析失败: {\key\": \"value2\"}", 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:50,313] [ERROR] 清理后仍无法解析JSON: {key": "value2"}"
+[2025-07-30 00:36:50,314] [ERROR] JSON解析失败: {\json\": {\"key\": \"value2\"}}", 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:50,314] [ERROR] 清理后仍无法解析JSON: {json": {"key": "value2"}}"
+[2025-07-30 00:36:50,314] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 00:36:50,315] [INFO] 请求地址: https://httpbin.org/post
+[2025-07-30 00:36:50,315] [INFO] 请求参数: {}
+[2025-07-30 00:36:52,319] [ERROR] JSON解析失败: {\foo\": \"bar\"}", 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:52,319] [ERROR] 清理后仍无法解析JSON: {foo": "bar"}"
+[2025-07-30 00:36:52,320] [ERROR] JSON解析失败: {\args\": {\"foo\": \"bar\"}}" , 错误: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+[2025-07-30 00:36:52,321] [ERROR] 清理后仍无法解析JSON: {args": {"foo": "bar"}}" 
+[2025-07-30 00:36:52,321] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 00:36:52,321] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 00:36:52,322] [INFO] 请求参数: {}
+[2025-07-30 00:36:54,902] [INFO] 接口返回: {'args': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-6888f8a5-36d08cfd7530f86349117c5c'}, 'origin': '139.227.195.146', 'url': 'https://httpbin.org/get'}
+[2025-07-30 00:38:25,457] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 00:38:25,458] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:38:25,459] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 00:38:30,212] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 00:38:30,213] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:38:30,213] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 00:38:34,693] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 00:38:34,694] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 00:38:34,694] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 00:38:39,222] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 00:38:39,222] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 00:38:39,223] [INFO] 请求参数: {'key': 'value1'}
+[2025-07-30 00:38:41,925] [INFO] 接口返回: {'args': {'key': 'value1'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-6888f910-7c6b68ef477987e211228fe5'}, 'origin': '139.227.195.146', 'url': 'https://httpbin.org/get?key=value1'}
+[2025-07-30 00:38:41,934] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 00:38:41,935] [INFO] 请求地址: https://httpbin.org/post
+[2025-07-30 00:38:41,935] [INFO] 请求参数: {'key': 'value2'}
+[2025-07-30 00:38:43,602] [INFO] 接口返回: {'args': {}, 'data': '{"key": "value2"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '17', 'Content-Type': 'application/json', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-6888f913-794723183aa11a9f451bc168'}, 'json': {'key': 'value2'}, 'origin': '139.227.195.146', 'url': 'https://httpbin.org/post'}
+[2025-07-30 00:38:43,614] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 00:38:43,615] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 00:38:43,615] [INFO] 请求参数: {'foo': 'bar'}
+[2025-07-30 00:38:44,813] [INFO] 接口返回: {'args': {'foo': 'bar'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-6888f915-1aa7a321304092f46fb3817f'}, 'origin': '139.227.195.146', 'url': 'https://httpbin.org/get?foo=bar'}

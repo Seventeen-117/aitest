@@ -1,0 +1,27 @@
+[2025-07-29 23:05:52,167] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-29 23:05:52,168] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:05:52,169] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-29 23:05:56,922] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-29 23:05:56,922] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:05:56,922] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-29 23:06:01,433] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-29 23:06:01,433] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:06:01,434] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-29 23:09:01,627] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-29 23:09:01,628] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:09:01,628] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-29 23:09:06,379] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-29 23:09:06,379] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:09:06,379] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-29 23:09:10,896] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-29 23:09:10,897] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:09:10,897] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-29 23:23:53,286] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-29 23:23:53,287] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:23:53,288] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-29 23:23:58,060] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-29 23:23:58,061] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:23:58,061] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-29 23:24:02,558] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-29 23:24:02,558] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-29 23:24:02,558] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
