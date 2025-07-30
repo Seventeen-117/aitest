@@ -333,3 +333,17 @@
 [2025-07-30 23:03:37,647] [INFO] 成功写入JSON文件: test_merged.json
 [2025-07-30 23:03:37,648] [INFO] 成功加载JSON文件: test_merged.json
 [2025-07-30 23:03:37,649] [INFO] 成功从字符串加载JSON数据
+[2025-07-30 23:33:09,061] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:33:09,065] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:33:09,140] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:33:09,141] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:34:02,967] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:34:02,969] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:34:03,067] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:34:03,111] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:34:03,150] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:34:03,184] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:34:03,320] [ERROR] RabbitMQ驱动未安装，请运行: pip install pika
+[2025-07-30 23:34:03,325] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
+[2025-07-30 23:34:03,339] [INFO] RabbitMQ连接已断开
+[2025-07-30 23:34:03,340] [INFO] RocketMQ连接已断开

@@ -1342,3 +1342,369 @@ value = reader.get_value("users[999].name", default="默认值")
 4. **编码支持** - 支持多种文件编码
 5. **Unicode支持** - 完整支持中文字符
 6. **向后兼容** - 保持与原有API的兼容性 
+
+---
+
+## MQ消息队列工具
+
+### 概述
+
+项目提供了完整的MQ（消息队列）工具，支持RabbitMQ和RocketMQ的消息发送和消费。该工具支持从配置文件加载MQ配置信息，并提供统一的消息发送和消费接口。
+
+### 支持的消息队列
+
+1. **RabbitMQ** - 支持交换机、队列、绑定等完整功能
+2. **RocketMQ** - 支持主题、标签、消费者组等功能
+
+### 配置文件
+
+MQ配置信息存储在 `conf/mq.yaml` 文件中，支持多环境配置：
+
+```yaml
+mq:
+  default_type: rabbitmq
+  
+  rabbitmq:
+    dev:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+      virtual_host: /
+      exchanges:
+        test_exchange:
+          name: test_exchange
+          type: direct
+          durable: true
+      queues:
+        test_queue:
+          name: test_queue
+          durable: true
+      bindings:
+        test_binding:
+          exchange: test_exchange
+          queue: test_queue
+          routing_key: test_key
+  
+  rocketmq:
+    dev:
+      name_server: localhost:9876
+      producer_group: test_producer_group
+      consumer_group: test_consumer_group
+      producer:
+        send_msg_timeout: 3000
+      consumer:
+        topics:
+          test_topic:
+            name: test_topic
+            tags: ["test_tag"]
+```
+
+### 使用方法
+
+#### 1. 基本使用
+
+```python
+from common.mq_utils import MQManager
+import json
+
+# 创建MQ管理器
+manager = MQManager(env='dev')
+
+# 发送RabbitMQ消息
+message = json.dumps({"id": 1, "content": "测试消息"})
+success = manager.send_message('rabbitmq', message, 
+                            exchange='test_exchange', routing_key='test_key')
+
+# 发送RocketMQ消息
+success = manager.send_message('rocketmq', message, 
+                            topic='test_topic', tags='test_tag')
+```
+
+#### 2. RabbitMQ操作
+
+```python
+from common.mq_utils import RabbitMQConnection, MQManager
+
+# 获取RabbitMQ连接
+manager = MQManager()
+connection = manager.get_connection('rabbitmq')
+
+if connection.connect():
+    # 声明交换机
+    connection.declare_exchange('test_exchange', 'direct')
+    
+    # 声明队列
+    connection.declare_queue('test_queue')
+    
+    # 绑定队列到交换机
+    connection.bind_queue('test_queue', 'test_exchange', 'test_key')
+    
+    # 发送消息
+    message = json.dumps({"content": "RabbitMQ测试消息"})
+    connection.publish_message('test_exchange', 'test_key', message)
+    
+    # 消费消息
+    def callback(ch, method, properties, body):
+        print(f"收到消息: {body.decode()}")
+        ch.basic_ack(delivery_tag=method.delivery_tag)
+    
+    connection.consume_message('test_queue', callback)
+    
+    # 断开连接
+    connection.disconnect()
+```
+
+#### 3. RocketMQ操作
+
+```python
+from common.mq_utils import RocketMQConnection, MQManager
+
+# 获取RocketMQ连接
+manager = MQManager()
+connection = manager.get_connection('rocketmq')
+
+if connection.connect():
+    # 发送消息
+    message = json.dumps({"content": "RocketMQ测试消息"})
+    connection.send_message('test_topic', message, 'test_tag')
+    
+    # 消费消息
+    def callback(msg):
+        print(f"收到消息: {msg.body.decode()}")
+        return True  # 消费成功
+    
+    connection.start_consumer('test_topic', callback, tags='test_tag')
+    
+    # 断开连接
+    connection.disconnect()
+```
+
+#### 4. 便捷函数
+
+```python
+from common.mq_utils import (
+    send_rabbitmq_message,
+    send_rocketmq_message,
+    consume_rabbitmq_message,
+    consume_rocketmq_message
+)
+
+# 发送消息
+message = json.dumps({"content": "便捷函数测试"})
+
+# RabbitMQ
+send_rabbitmq_message(message, 'test_exchange', 'test_key')
+
+# RocketMQ
+send_rocketmq_message(message, 'test_topic', 'test_tag')
+
+# 消费消息
+def rabbitmq_callback(ch, method, properties, body):
+    print(f"RabbitMQ消息: {body.decode()}")
+    ch.basic_ack(delivery_tag=method.delivery_tag)
+
+def rocketmq_callback(msg):
+    print(f"RocketMQ消息: {msg.body.decode()}")
+    return True
+
+consume_rabbitmq_message(rabbitmq_callback, 'test_queue')
+consume_rocketmq_message(rocketmq_callback, 'test_topic')
+```
+
+### 高级功能
+
+#### 1. 多环境支持
+
+```python
+# 开发环境
+manager = MQManager(env='dev')
+
+# 测试环境
+manager = MQManager(env='test')
+
+# 生产环境
+manager = MQManager(env='prod')
+```
+
+#### 2. 消息属性设置
+
+```python
+# RabbitMQ消息属性
+properties = {
+    'delivery_mode': 2,  # 持久化消息
+    'content_type': 'application/json',
+    'headers': {'custom_header': 'value'}
+}
+
+connection.publish_message('exchange', 'routing_key', message, properties)
+
+# RocketMQ消息属性
+connection.send_message('topic', message, 'tag', 'key', delay_level=1)
+```
+
+#### 3. 批量操作
+
+```python
+# 批量发送消息
+messages = [
+    {"id": 1, "content": "消息1"},
+    {"id": 2, "content": "消息2"},
+    {"id": 3, "content": "消息3"}
+]
+
+for msg in messages:
+    message = json.dumps(msg)
+    manager.send_message('rabbitmq', message, 
+                       exchange='test_exchange', routing_key='test_key')
+```
+
+#### 4. 错误处理
+
+```python
+try:
+    success = manager.send_message('rabbitmq', message)
+    if not success:
+        print("消息发送失败")
+except Exception as e:
+    print(f"发送消息时发生错误: {e}")
+```
+
+### 配置说明
+
+#### RabbitMQ配置
+
+```yaml
+rabbitmq:
+  dev:
+    host: localhost              # 主机地址
+    port: 5672                   # 端口
+    username: guest              # 用户名
+    password: guest              # 密码
+    virtual_host: /              # 虚拟主机
+    connection_timeout: 30       # 连接超时
+    heartbeat_interval: 600      # 心跳间隔
+    exchanges:                   # 交换机配置
+      test_exchange:
+        name: test_exchange
+        type: direct             # 类型: direct, fanout, topic
+        durable: true
+        auto_delete: false
+    queues:                      # 队列配置
+      test_queue:
+        name: test_queue
+        durable: true
+        auto_delete: false
+        arguments: {}
+    bindings:                    # 绑定关系
+      test_binding:
+        exchange: test_exchange
+        queue: test_queue
+        routing_key: test_key
+```
+
+#### RocketMQ配置
+
+```yaml
+rocketmq:
+  dev:
+    name_server: localhost:9876  # 名称服务器
+    producer_group: test_producer_group    # 生产者组
+    consumer_group: test_consumer_group    # 消费者组
+    producer:                    # 生产者配置
+      send_msg_timeout: 3000    # 发送超时
+      retry_times_when_send_failed: 2     # 发送失败重试次数
+      max_message_size: 4194304 # 最大消息大小
+    consumer:                    # 消费者配置
+      pull_batch_size: 32       # 拉取批次大小
+      pull_interval: 0          # 拉取间隔
+      topics:                   # 订阅主题
+        test_topic:
+          name: test_topic
+          tags: ["test_tag"]
+          sub_expression: "*"
+```
+
+### 测试消息发送和消费
+
+#### 1. 发送测试消息
+
+```python
+from common.mq_utils import MQManager
+import json
+
+# 创建测试消息
+test_message = json.dumps({
+    "id": 1,
+    "content": "测试消息",
+    "timestamp": time.time(),
+    "type": "test"
+})
+
+# 发送到RabbitMQ
+manager = MQManager()
+success = manager.send_message('rabbitmq', test_message, 
+                            exchange='test_exchange', routing_key='test_key')
+
+# 发送到RocketMQ
+success = manager.send_message('rocketmq', test_message, 
+                            topic='test_topic', tags='test_tag')
+```
+
+#### 2. 消费测试消息
+
+```python
+# RabbitMQ消费
+def rabbitmq_handler(ch, method, properties, body):
+    try:
+        message = json.loads(body.decode('utf-8'))
+        print(f"收到RabbitMQ消息: {message}")
+        # 处理消息逻辑
+        ch.basic_ack(delivery_tag=method.delivery_tag)
+    except Exception as e:
+        print(f"处理消息失败: {e}")
+        ch.basic_nack(delivery_tag=method.delivery_tag)
+
+# RocketMQ消费
+def rocketmq_handler(msg):
+    try:
+        message = msg.body.decode('utf-8')
+        print(f"收到RocketMQ消息: {message}")
+        # 处理消息逻辑
+        return True  # 消费成功
+    except Exception as e:
+        print(f"处理消息失败: {e}")
+        return False  # 消费失败
+
+# 启动消费者
+manager.consume_message('rabbitmq', rabbitmq_handler, queue='test_queue')
+manager.consume_message('rocketmq', rocketmq_handler, topic='test_topic')
+```
+
+### 主要特性
+
+1. **多MQ支持** - 支持RabbitMQ和RocketMQ
+2. **配置驱动** - 从配置文件加载MQ配置
+3. **多环境支持** - 支持dev、test、prod环境
+4. **统一接口** - 提供统一的消息发送和消费接口
+5. **错误处理** - 完善的错误处理和重试机制
+6. **连接管理** - 自动管理连接池和连接状态
+7. **消息持久化** - 支持消息持久化和可靠性投递
+
+### 依赖安装
+
+```bash
+# 安装RabbitMQ驱动
+pip install pika
+
+# 安装RocketMQ驱动
+pip install rocketmq-client-python
+```
+
+### 注意事项
+
+1. **服务可用性** - 确保RabbitMQ或RocketMQ服务正在运行
+2. **网络连接** - 确保网络连接正常，防火墙允许相应端口
+3. **权限配置** - 确保用户有相应的读写权限
+4. **资源清理** - 使用完毕后及时断开连接
+5. **错误处理** - 在生产环境中需要完善的错误处理机制 
