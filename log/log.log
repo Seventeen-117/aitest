@@ -59,3 +59,66 @@
 [2025-07-30 00:38:43,615] [INFO] 请求地址: https://httpbin.org/get
 [2025-07-30 00:38:43,615] [INFO] 请求参数: {'foo': 'bar'}
 [2025-07-30 00:38:44,813] [INFO] 接口返回: {'args': {'foo': 'bar'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-6888f915-1aa7a321304092f46fb3817f'}, 'origin': '139.227.195.146', 'url': 'https://httpbin.org/get?foo=bar'}
+[2025-07-30 10:57:11,570] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 10:57:11,570] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 10:57:11,571] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 10:57:16,124] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 10:57:16,124] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 10:57:16,124] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 10:57:20,327] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 10:57:20,327] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 10:57:20,328] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 10:57:24,551] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 10:57:24,551] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 10:57:24,551] [INFO] 请求参数: {'key': 'value1'}
+[2025-07-30 10:57:28,320] [INFO] 接口返回: {'args': {'key': 'value1'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-688988d4-690c8140530625d728242e73'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?key=value1'}
+[2025-07-30 10:57:28,325] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 10:57:28,325] [INFO] 请求地址: https://httpbin.org/post
+[2025-07-30 10:57:28,326] [INFO] 请求参数: {'key': 'value2'}
+[2025-07-30 10:57:29,464] [INFO] 接口返回: {'args': {}, 'data': '{"key": "value2"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '17', 'Content-Type': 'application/json', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-688988d8-5da50c9c1b9023806eee0ae1'}, 'json': {'key': 'value2'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/post'}
+[2025-07-30 10:57:29,469] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 10:57:29,469] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 10:57:29,470] [INFO] 请求参数: {'foo': 'bar'}
+[2025-07-30 10:57:30,589] [INFO] 接口返回: {'args': {'foo': 'bar'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.4', 'X-Amzn-Trace-Id': 'Root=1-688988d9-35e652892b7ad7726a86a056'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?foo=bar'}
+[2025-07-30 11:00:42,794] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 11:00:42,795] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:00:42,798] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 11:00:47,349] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 11:00:47,349] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:00:47,349] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 11:00:51,722] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 11:00:51,722] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:00:51,723] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 11:00:56,087] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 11:00:56,087] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 11:00:56,087] [INFO] 请求参数: {'key': 'value1'}
+[2025-07-30 11:00:57,315] [INFO] 接口返回: {'args': {'key': 'value1'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-688989a8-5ed7e7337735e259629e1c9f'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?key=value1'}
+[2025-07-30 11:00:57,324] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 11:00:57,325] [INFO] 请求地址: https://httpbin.org/post
+[2025-07-30 11:00:57,326] [INFO] 请求参数: {'key': 'value2'}
+[2025-07-30 11:00:58,479] [INFO] 接口返回: {'args': {}, 'data': '{"key": "value2"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '17', 'Content-Type': 'application/json', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-688989a9-67d53df32d61f52312c9ca0c'}, 'json': {'key': 'value2'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/post'}
+[2025-07-30 11:00:58,490] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 11:00:58,491] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 11:00:58,492] [INFO] 请求参数: {'foo': 'bar'}
+[2025-07-30 11:01:00,110] [INFO] 接口返回: {'args': {'foo': 'bar'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-688989aa-5d05f2a6421e788e34e5f900'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?foo=bar'}
+[2025-07-30 11:03:22,464] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 11:03:22,465] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:03:22,465] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 11:03:27,024] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 11:03:27,024] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:03:27,025] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 11:03:31,403] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 11:03:31,404] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 11:03:31,404] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 11:03:35,798] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 11:03:35,798] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 11:03:35,799] [INFO] 请求参数: {'key': 'value1'}
+[2025-07-30 11:03:37,536] [INFO] 接口返回: {'args': {'key': 'value1'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-68898a47-4ac2b59e5c6b774029715e19'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?key=value1'}
+[2025-07-30 11:03:37,548] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 11:03:37,549] [INFO] 请求地址: https://httpbin.org/post
+[2025-07-30 11:03:37,550] [INFO] 请求参数: {'key': 'value2'}
+[2025-07-30 11:03:38,693] [INFO] 接口返回: {'args': {}, 'data': '{"key": "value2"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '17', 'Content-Type': 'application/json', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-68898a49-253a5f4f7f471849608b3bef'}, 'json': {'key': 'value2'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/post'}
+[2025-07-30 11:03:38,705] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 11:03:38,706] [INFO] 请求地址: https://httpbin.org/get
+[2025-07-30 11:03:38,707] [INFO] 请求参数: {'foo': 'bar'}
+[2025-07-30 11:03:39,884] [INFO] 接口返回: {'args': {'foo': 'bar'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.32.3', 'X-Amzn-Trace-Id': 'Root=1-68898a4a-782814a74530fe9804e4edf3'}, 'origin': '58.247.23.136', 'url': 'https://httpbin.org/get?foo=bar'}
