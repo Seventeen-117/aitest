@@ -347,3 +347,65 @@
 [2025-07-30 23:34:03,325] [ERROR] RocketMQ驱动未安装，请运行: pip install rocketmq-client-python
 [2025-07-30 23:34:03,339] [INFO] RabbitMQ连接已断开
 [2025-07-30 23:34:03,340] [INFO] RocketMQ连接已断开
+[2025-07-30 23:53:44,836] [INFO] 执行用例: 1 - 正常请求-简单问题
+[2025-07-30 23:53:44,837] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 23:53:44,837] [INFO] 请求参数: {'message': '你好，今天天气怎么样？', 'user_id': 'user001'}
+[2025-07-30 23:53:49,581] [INFO] 执行用例: 2 - 异常请求-缺少message参数
+[2025-07-30 23:53:49,582] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 23:53:49,582] [INFO] 请求参数: {'user_id': 'user002'}
+[2025-07-30 23:53:54,143] [INFO] 执行用例: 3 - 正常请求-英文问题
+[2025-07-30 23:53:54,144] [INFO] 请求地址: http://localhost:8688/api/chatGatWay-internal
+[2025-07-30 23:53:54,144] [INFO] 请求参数: {'message': 'What is the capital of France?', 'user_id': 'user003'}
+[2025-07-30 23:53:58,641] [INFO] 测试文件: test_http_data
+[2025-07-30 23:53:58,641] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 23:53:58,642] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:53:58,642] [INFO] 请求参数: {}
+[2025-07-30 23:54:11,730] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:54:11,731] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 23:54:11,731] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts
+[2025-07-30 23:54:11,732] [INFO] 请求参数: {'title': 'test', 'body': 'test body', 'userId': 1}
+[2025-07-30 23:54:43,057] [ERROR] 测试用例执行失败: object of type 'NoneType' has no len()
+[2025-07-30 23:54:43,076] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 23:54:43,077] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:54:43,077] [INFO] 请求参数: {}
+[2025-07-30 23:54:56,110] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:54:56,111] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 23:54:56,111] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts
+[2025-07-30 23:54:56,112] [INFO] 请求参数: {'title': 'test', 'body': 'test body', 'userId': 1}
+[2025-07-30 23:55:11,014] [INFO] 接口返回: {'title': 'test', 'body': 'test body', 'userId': 1, 'id': 101}
+[2025-07-30 23:55:11,014] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 23:55:11,015] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:55:11,015] [INFO] 请求参数: {}
+[2025-07-30 23:55:13,903] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:13,989] [INFO] 参数化测试 - 用例: 1 - 测试GET请求
+[2025-07-30 23:55:13,990] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:55:13,990] [INFO] 请求参数: {}
+[2025-07-30 23:55:17,491] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:17,504] [INFO] 参数化测试 - 用例: 2 - 测试POST请求
+[2025-07-30 23:55:17,505] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts
+[2025-07-30 23:55:17,505] [INFO] 请求参数: {'title': 'test', 'body': 'test body', 'userId': 1}
+[2025-07-30 23:55:18,505] [INFO] 接口返回: {'title': 'test', 'body': 'test body', 'userId': 1, 'id': 101}
+[2025-07-30 23:55:18,516] [INFO] 参数化测试 - 用例: 3 - 测试带参数GET
+[2025-07-30 23:55:18,516] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:55:18,516] [INFO] 请求参数: {}
+[2025-07-30 23:55:21,383] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:21,391] [INFO] HTTP数据测试 - 用例: 1 - 测试GET请求
+[2025-07-30 23:55:24,414] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:24,414] [INFO] HTTP数据测试 - 用例: 2 - 测试POST请求
+[2025-07-30 23:55:27,358] [INFO] 接口返回: {'title': 'test', 'body': 'test body', 'userId': 1, 'id': 101}
+[2025-07-30 23:55:27,358] [INFO] HTTP数据测试 - 用例: 3 - 测试带参数GET
+[2025-07-30 23:55:28,943] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:28,957] [INFO] 聊天网关测试 - 用例: 1 - 正常请求-简单问题
+[2025-07-30 23:55:33,035] [ERROR] 聊天网关测试执行失败: object of type 'NoneType' has no len()
+[2025-07-30 23:55:33,051] [INFO] 执行用例: 1 - 测试GET请求
+[2025-07-30 23:55:33,051] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:55:33,051] [INFO] 请求参数: {}
+[2025-07-30 23:55:37,065] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}
+[2025-07-30 23:55:37,079] [INFO] 执行用例: 2 - 测试POST请求
+[2025-07-30 23:55:37,079] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts
+[2025-07-30 23:55:37,080] [INFO] 请求参数: {'title': 'test', 'body': 'test body', 'userId': 1}
+[2025-07-30 23:55:38,046] [INFO] 接口返回: {'title': 'test', 'body': 'test body', 'userId': 1, 'id': 101}
+[2025-07-30 23:55:38,055] [INFO] 执行用例: 3 - 测试带参数GET
+[2025-07-30 23:55:38,055] [INFO] 请求地址: https://jsonplaceholder.typicode.com/posts/1
+[2025-07-30 23:55:38,056] [INFO] 请求参数: {}
+[2025-07-30 23:55:41,342] [INFO] 接口返回: {'userId': 1, 'id': 1, 'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit', 'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'}

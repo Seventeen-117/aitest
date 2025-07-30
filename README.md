@@ -1708,3 +1708,207 @@ pip install rocketmq-client-python
 3. **权限配置** - 确保用户有相应的读写权限
 4. **资源清理** - 使用完毕后及时断开连接
 5. **错误处理** - 在生产环境中需要完善的错误处理机制 
+
+---
+
+## API监控功能
+
+### 概述
+
+项目提供了完整的API监控功能，自动记录所有API请求和响应信息到 `api_monitor.log` 文件。该功能可以帮助开发者监控API性能、调试问题、分析请求模式。
+
+### 为什么api_monitor.log是空的
+
+之前 `api_monitor.log` 文件为空的原因是：
+
+1. **日志函数未被调用** - 只有 `api_info()` 和 `api_error()` 函数才会写入 `api_monitor.log`
+2. **测试用例使用普通日志** - 当前的测试用例使用的是 `info()` 和 `error()` 函数，这些写入到 `log.log`
+3. **缺少自动监控** - 没有自动监控机制来记录所有API请求
+
+### 解决方案
+
+现在项目已经实现了完整的API监控功能：
+
+1. **HTTP工具类集成** - 所有HTTP请求都会自动记录到 `api_monitor.log`
+2. **API监控装饰器** - 提供装饰器来自动监控函数调用
+3. **直接日志记录** - 可以直接使用 `api_info()` 和 `api_error()` 函数
+
+### 功能特性
+
+1. **自动监控** - 所有HTTP请求自动记录
+2. **详细信息** - 记录请求URL、方法、参数、响应时间、状态码等
+3. **错误追踪** - 记录请求失败的原因和错误信息
+4. **性能统计** - 提供请求统计和性能分析
+5. **JSON格式** - 日志以JSON格式记录，便于解析和分析
+
+### 使用方法
+
+#### 1. 自动监控（推荐）
+
+所有使用 `utils.http_utils` 中的HTTP函数都会自动记录到 `api_monitor.log`：
+
+```python
+from utils.http_utils import http_get, http_post
+
+# 这些请求会自动记录到 api_monitor.log
+response1 = http_get("https://api.example.com/users")
+response2 = http_post("https://api.example.com/users", json_data={"name": "张三"})
+```
+
+#### 2. 使用API监控装饰器
+
+```python
+from common.api_monitor import api_monitor, http_monitor
+
+# 监控普通函数
+@api_monitor
+def my_api_function():
+    # 函数逻辑
+    return {"status": "success"}
+
+# 监控HTTP请求
+@http_monitor(url="https://api.example.com/test", method="GET")
+def my_http_request():
+    # HTTP请求逻辑
+    return {"status": "success"}
+```
+
+#### 3. 直接记录API日志
+
+```python
+from common.log import api_info, api_error
+
+# 记录API信息
+api_info("API请求开始: GET /api/users")
+api_info("API响应成功: 200 OK")
+
+# 记录API错误
+api_error("API请求失败: 连接超时")
+api_error("API响应错误: 500 Internal Server Error")
+```
+
+#### 4. 使用API监控类
+
+```python
+from common.api_monitor import APIMonitor
+
+# 创建监控实例
+monitor = APIMonitor()
+
+# 记录请求
+monitor.record_request(
+    url="https://api.example.com/users",
+    method="GET",
+    params={"id": 1},
+    response={"status": "success"},
+    execution_time=0.1
+)
+
+# 获取统计信息
+stats = monitor.get_statistics()
+print(f"请求统计: {stats}")
+```
+
+### 日志格式
+
+#### HTTP请求日志
+
+```json
+{
+  "timestamp": 1753890765.9612596,
+  "method": "GET",
+  "url": "https://jsonplaceholder.typicode.com/posts/1",
+  "params": {},
+  "json_data": {},
+  "headers": {}
+}
+```
+
+#### HTTP响应日志
+
+```json
+{
+  "timestamp": 1753890769.8178039,
+  "method": "GET",
+  "url": "https://jsonplaceholder.typicode.com/posts/1",
+  "status_code": 200,
+  "execution_time_ms": 3856.54,
+  "response_size": 292,
+  "status": "success"
+}
+```
+
+#### API监控记录
+
+```json
+{
+  "timestamp": 1753890781.292537,
+  "url": "https://api.example.com/test",
+  "method": "GET",
+  "params": {"id": 1},
+  "status": "success",
+  "execution_time_ms": 100.0,
+  "request_count": 1,
+  "success_count": 1,
+  "error_count": 0,
+  "avg_time_ms": 100.0,
+  "response_size": 21
+}
+```
+
+### 监控内容
+
+#### 请求信息
+- **URL** - 请求地址
+- **方法** - HTTP方法（GET、POST、PUT、DELETE等）
+- **参数** - 查询参数和请求体
+- **请求头** - HTTP请求头（排除敏感信息）
+- **时间戳** - 请求开始时间
+
+#### 响应信息
+- **状态码** - HTTP响应状态码
+- **响应大小** - 响应内容大小
+- **执行时间** - 请求执行时间（毫秒）
+- **响应内容** - 响应数据（可选）
+
+#### 错误信息
+- **错误类型** - 异常类型
+- **错误消息** - 详细错误信息
+- **错误堆栈** - 错误堆栈信息（可选）
+
+### 性能统计
+
+API监控类提供以下统计信息：
+
+```python
+{
+  "total_requests": 10,           # 总请求数
+  "success_requests": 8,          # 成功请求数
+  "error_requests": 2,            # 失败请求数
+  "success_rate": 80.0,           # 成功率（百分比）
+  "avg_execution_time_ms": 150.5, # 平均执行时间（毫秒）
+  "total_execution_time_ms": 1505.0 # 总执行时间（毫秒）
+}
+```
+
+### 日志文件管理
+
+- **文件位置** - `log/api_monitor.log`
+- **轮转策略** - 每天轮转，保留7天
+- **编码格式** - UTF-8
+- **日志级别** - INFO和ERROR
+
+### 配置说明
+
+API监控功能通过以下方式配置：
+
+1. **日志配置** - 在 `common/log.py` 中配置
+2. **监控装饰器** - 在 `common/api_monitor.py` 中定义
+3. **HTTP工具集成** - 在 `utils/http_utils.py` 中集成
+
+### 使用建议
+
+1. **生产环境** - 建议启用API监控来追踪性能问题
+2. **开发环境** - 可以详细记录所有API请求用于调试
+3. **测试环境** - 记录测试过程中的API调用用于分析
+4. **日志分析** - 可以使用工具分析JSON格式的日志文件 

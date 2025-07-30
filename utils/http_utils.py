@@ -2,6 +2,8 @@ import requests
 from typing import Dict, Any, Optional, Union
 import json
 import logging
+import time
+from common.log import api_info, api_error
 
 # 配置日志
 logger = logging.getLogger(__name__)
@@ -38,6 +40,45 @@ class HTTPUtils:
             final_headers['Authorization'] = f'Bearer {token}'
         return final_headers
     
+    def _log_api_request(self, method: str, url: str, params: Dict = None, 
+                        json_data: Dict = None, headers: Dict = None, 
+                        start_time: float = None):
+        """
+        记录API请求信息
+        """
+        request_info = {
+            "timestamp": start_time or time.time(),
+            "method": method.upper(),
+            "url": url,
+            "params": params or {},
+            "json_data": json_data or {},
+            "headers": {k: v for k, v in (headers or {}).items() if k.lower() not in ['authorization', 'cookie']}
+        }
+        api_info(f"HTTP请求开始: {json.dumps(request_info, ensure_ascii=False)}")
+    
+    def _log_api_response(self, method: str, url: str, response: requests.Response, 
+                         start_time: float, success: bool = True, error: str = None):
+        """
+        记录API响应信息
+        """
+        execution_time = (time.time() - start_time) * 1000
+        
+        response_info = {
+            "timestamp": time.time(),
+            "method": method.upper(),
+            "url": url,
+            "status_code": response.status_code,
+            "execution_time_ms": round(execution_time, 2),
+            "response_size": len(response.content),
+            "status": "success" if success else "error"
+        }
+        
+        if error:
+            response_info["error"] = error
+            api_error(f"HTTP请求失败: {json.dumps(response_info, ensure_ascii=False)}")
+        else:
+            api_info(f"HTTP请求成功: {json.dumps(response_info, ensure_ascii=False)}")
+    
     def _make_request(self, method: str, url: str, **kwargs) -> requests.Response:
         """
         发送HTTP请求
@@ -58,6 +99,17 @@ class HTTPUtils:
         
         # 设置超时时间
         timeout = kwargs.pop('timeout', self.default_timeout)
+        
+        # 记录请求开始
+        start_time = time.time()
+        self._log_api_request(
+            method=method,
+            url=url,
+            params=kwargs.get('params'),
+            json_data=kwargs.get('json'),
+            headers=headers,
+            start_time=start_time
+        )
         
         # 记录请求信息
         logger.info(f"发送 {method.upper()} 请求到: {url}")
@@ -80,10 +132,17 @@ class HTTPUtils:
             logger.info(f"响应状态码: {response.status_code}")
             logger.debug(f"响应头: {dict(response.headers)}")
             
+            # 记录API响应
+            self._log_api_response(method, url, response, start_time)
+            
             return response
             
         except requests.exceptions.RequestException as e:
             logger.error(f"请求失败: {e}")
+            
+            # 记录API错误
+            self._log_api_response(method, url, requests.Response(), start_time, success=False, error=str(e))
+            
             raise
     
     def get(self, url: str, params: Optional[Dict] = None, headers: Optional[Dict] = None, 
