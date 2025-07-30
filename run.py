@@ -18,6 +18,7 @@ if __name__ == "__main__":
     # 构建pytest参数
     pytest_args = [
         "testcase",
+        '-s',
         "-v",  # 详细输出
         "--tb=short",  # 简短的错误回溯
     ]

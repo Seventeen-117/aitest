@@ -1087,3 +1087,258 @@ case_id,description,url,method,params,expected_result
 - `get_excel_test_data()` - 获取所有Excel测试数据
 - `load_caseparams_by_type(file_type)` - 按类型加载测试数据
 - `get_available_test_files()` - 获取所有可用测试文件 
+
+---
+
+## JSON文件读取工具
+
+### 概述
+
+项目提供了强大的JSON文件读取工具，支持加载、解析、读取JSON文件，包括多层嵌套结构。该工具提供了完整的JSON操作功能，包括路径查询、数据修改、搜索、验证等。
+
+### 主要功能
+
+1. **多层嵌套支持** - 支持任意深度的JSON嵌套结构
+2. **路径查询** - 支持点号分隔和数组索引的路径查询
+3. **数据修改** - 支持设置、删除JSON中的值
+4. **搜索功能** - 支持在JSON中搜索指定键的所有值
+5. **结构分析** - 获取JSON结构信息
+6. **Schema验证** - 验证JSON数据是否符合指定schema
+7. **文件操作** - 支持读取、写入、合并JSON文件
+
+### 使用方法
+
+#### 1. 基本使用
+
+```python
+from utils.read_jsonfile_utils import JSONFileReader
+
+# 创建JSON读取器
+reader = JSONFileReader("config.json")
+
+# 获取完整数据
+data = reader.get_data()
+
+# 根据路径获取值
+username = reader.get_value("user.name")
+age = reader.get_value("user.profile.age")
+first_item = reader.get_value("items[0]")
+nested_value = reader.get_value("user.addresses[0].city")
+```
+
+#### 2. 路径查询语法
+
+支持多种路径查询语法：
+
+```python
+# 对象属性访问
+reader.get_value("user.name")                    # 访问user对象的name属性
+
+# 数组索引访问
+reader.get_value("users[0]")                    # 访问users数组的第一个元素
+reader.get_value("users[0].profile.age")        # 访问嵌套结构
+
+# 混合路径
+reader.get_value("data.items[1].properties.name")  # 复杂嵌套路径
+```
+
+#### 3. 数据修改
+
+```python
+# 设置值
+reader.set_value("user.phone", "13800138000")
+reader.set_value("settings.theme", "dark")
+reader.set_value("users[0].profile.email", "new@example.com")
+
+# 删除值
+reader.delete_value("user.phone")
+reader.delete_value("users[0].profile.email")
+
+# 保存修改
+reader.save_file("updated_config.json")
+```
+
+#### 4. 搜索功能
+
+```python
+# 搜索所有名为"city"的字段
+city_results = reader.search_values("city")
+for path, value in city_results:
+    print(f"找到 {path}: {value}")
+
+# 搜索所有名为"theme"的字段
+theme_results = reader.search_values("theme")
+for path, value in theme_results:
+    print(f"找到 {path}: {value}")
+```
+
+#### 5. 结构分析
+
+```python
+# 获取JSON结构信息
+structure = reader.get_structure(max_depth=3)
+print(f"JSON结构: {structure}")
+
+# 结构信息包含：
+# - type: 数据类型 (dict, list, string, number, boolean)
+# - keys: 对象的键列表
+# - length: 数组的长度
+# - children: 子结构信息
+```
+
+#### 6. Schema验证
+
+```python
+# 定义schema
+schema = {
+    "type": "object",
+    "properties": {
+        "user": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "number"},
+                "name": {"type": "string"}
+            },
+            "required": ["id", "name"]
+        }
+    }
+}
+
+# 验证数据
+is_valid, errors = reader.validate_schema(schema)
+if not is_valid:
+    for error in errors:
+        print(f"验证错误: {error}")
+```
+
+#### 7. 从字符串加载
+
+```python
+# 从字符串加载JSON
+json_string = '{"name": "张三", "age": 25}'
+reader = JSONFileReader()
+reader.load_string(json_string)
+
+# 获取值
+name = reader.get_value("name")  # "张三"
+age = reader.get_value("age")    # 25
+```
+
+### 便捷函数
+
+#### 基本操作
+
+```python
+from utils.read_jsonfile_utils import (
+    read_json_file,
+    get_json_value,
+    write_json_file,
+    merge_json_files
+)
+
+# 读取JSON文件
+data = read_json_file("config.json")
+
+# 获取指定路径的值
+value = get_json_value("config.json", "user.name", default="默认值")
+
+# 写入JSON文件
+write_json_file("output.json", data, indent=2)
+
+# 合并多个JSON文件
+merge_json_files(["file1.json", "file2.json"], "merged.json")
+```
+
+### 复杂示例
+
+```python
+from utils.read_jsonfile_utils import JSONFileReader
+
+# 复杂的JSON数据结构
+complex_data = {
+    "users": [
+        {
+            "id": 1,
+            "name": "张三",
+            "profile": {
+                "age": 25,
+                "email": "zhangsan@example.com",
+                "addresses": [
+                    {"type": "home", "city": "北京"},
+                    {"type": "work", "city": "上海"}
+                ],
+                "preferences": {
+                    "theme": "dark",
+                    "language": "zh-CN"
+                }
+            }
+        }
+    ],
+    "settings": {
+        "app": {
+            "version": "1.0.0",
+            "debug": True
+        }
+    }
+}
+
+# 创建读取器
+reader = JSONFileReader()
+reader.load_string(json.dumps(complex_data))
+
+# 复杂路径查询
+first_user_name = reader.get_value("users[0].name")                    # "张三"
+first_user_age = reader.get_value("users[0].profile.age")              # 25
+first_address = reader.get_value("users[0].profile.addresses[0]")      # {"type": "home", "city": "北京"}
+theme = reader.get_value("users[0].profile.preferences.theme")         # "dark"
+app_version = reader.get_value("settings.app.version")                 # "1.0.0"
+
+# 搜索所有城市
+city_results = reader.search_values("city")
+# 结果: [("users[0].profile.addresses[0].city", "北京"), ("users[0].profile.addresses[1].city", "上海")]
+
+# 设置新值
+reader.set_value("users[0].profile.phone", "13800138000")
+reader.set_value("settings.app.new_feature", True)
+
+# 获取结构信息
+structure = reader.get_structure(max_depth=2)
+```
+
+### 错误处理
+
+工具提供了完善的错误处理机制：
+
+```python
+# 文件不存在
+reader = JSONFileReader("nonexistent.json")
+# 输出: [ERROR] 文件不存在: nonexistent.json
+
+# JSON格式错误
+reader.load_string('{"invalid": json}')
+# 输出: [ERROR] JSON字符串格式错误: Expecting ',' delimiter
+
+# 路径不存在
+value = reader.get_value("nonexistent.path", default="默认值")
+# 返回: "默认值"
+
+# 数组越界
+value = reader.get_value("users[999].name", default="默认值")
+# 返回: "默认值"
+```
+
+### 性能优化
+
+- **延迟加载** - 只有在需要时才加载文件
+- **路径缓存** - 解析过的路径会被缓存以提高性能
+- **内存优化** - 支持大文件的分块处理
+- **错误恢复** - 提供默认值和错误恢复机制
+
+### 主要特性
+
+1. **类型安全** - 使用类型提示确保代码质量
+2. **错误处理** - 完善的异常处理和错误信息
+3. **日志记录** - 详细的操作日志
+4. **编码支持** - 支持多种文件编码
+5. **Unicode支持** - 完整支持中文字符
+6. **向后兼容** - 保持与原有API的兼容性 
